@@ -5,7 +5,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/arnodel/golua/token"
+	"github.com/BegoniaHe/golua/token"
 )
 
 type tok struct {

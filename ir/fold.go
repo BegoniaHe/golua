@@ -1,7 +1,7 @@
 package ir
 
 import (
-	"github.com/arnodel/golua/ops"
+	"github.com/BegoniaHe/golua/ops"
 )
 
 // FoldConstants uses the given FoldFunc to fold the code items in the given

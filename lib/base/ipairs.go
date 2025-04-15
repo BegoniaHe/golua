@@ -1,6 +1,6 @@
 package base
 
-import rt "github.com/arnodel/golua/runtime"
+import rt "github.com/BegoniaHe/golua/runtime"
 
 func ipairsIteratorF(t *rt.Thread, c *rt.GoCont) (rt.Cont, error) {
 	if err := c.CheckNArgs(2); err != nil {

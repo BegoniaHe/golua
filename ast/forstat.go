@@ -1,7 +1,7 @@
 package ast
 
 import (
-	"github.com/arnodel/golua/token"
+	"github.com/BegoniaHe/golua/token"
 )
 
 // ForStat represents the statement node "for Var = Start, Stop, Step do Body end".

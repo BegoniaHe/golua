@@ -1,6 +1,6 @@
 package stringlib
 
-import rt "github.com/arnodel/golua/runtime"
+import rt "github.com/BegoniaHe/golua/runtime"
 
 var (
 	string__add  = stringBinOp(rt.Add, "__add")

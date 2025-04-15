@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"unsafe"
 
-	"github.com/arnodel/golua/luastrings"
-	rt "github.com/arnodel/golua/runtime"
+	"github.com/BegoniaHe/golua/luastrings"
+	rt "github.com/BegoniaHe/golua/runtime"
 )
 
 /*

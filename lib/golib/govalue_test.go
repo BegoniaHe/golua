@@ -5,7 +5,7 @@ import (
 	"reflect"
 	"testing"
 
-	rt "github.com/arnodel/golua/runtime"
+	rt "github.com/BegoniaHe/golua/runtime"
 )
 
 func Test_reflectToValue(t *testing.T) {

@@ -1,7 +1,7 @@
 package ast
 
 import (
-	"github.com/arnodel/golua/token"
+	"github.com/BegoniaHe/golua/token"
 )
 
 //
@@ -10,7 +10,7 @@ import (
 
 // A TableConstructor is an expression node representing a table literal, e.g.
 //
-//    { "hello", 4.5, x = 2, [z] = true }
+//	{ "hello", 4.5, x = 2, [z] = true }
 type TableConstructor struct {
 	Location
 	Fields []TableField

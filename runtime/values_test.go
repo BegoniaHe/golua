@@ -3,7 +3,7 @@ package runtime
 import (
 	"testing"
 
-	"github.com/arnodel/golua/luastrings"
+	"github.com/BegoniaHe/golua/luastrings"
 )
 
 func TestStringNormPos(t *testing.T) {

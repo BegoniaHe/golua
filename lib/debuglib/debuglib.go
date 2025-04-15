@@ -4,8 +4,8 @@ import (
 	"errors"
 	"strings"
 
-	"github.com/arnodel/golua/lib/packagelib"
-	rt "github.com/arnodel/golua/runtime"
+	"github.com/BegoniaHe/golua/lib/packagelib"
+	rt "github.com/BegoniaHe/golua/runtime"
 )
 
 // LibLoader can load the debug lib.

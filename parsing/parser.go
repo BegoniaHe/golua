@@ -4,11 +4,11 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/arnodel/golua/luastrings"
-	"github.com/arnodel/golua/ops"
-	"github.com/arnodel/golua/token"
+	"github.com/BegoniaHe/golua/luastrings"
+	"github.com/BegoniaHe/golua/ops"
+	"github.com/BegoniaHe/golua/token"
 
-	"github.com/arnodel/golua/ast"
+	"github.com/BegoniaHe/golua/ast"
 )
 
 // Parser can parse lua statements or expressions

@@ -3,8 +3,8 @@ package astcomp
 import (
 	"fmt"
 
-	"github.com/arnodel/golua/ast"
-	"github.com/arnodel/golua/ir"
+	"github.com/BegoniaHe/golua/ast"
+	"github.com/BegoniaHe/golua/ir"
 )
 
 type assignFunc func(ir.Register)

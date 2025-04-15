@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/arnodel/golua/token"
+	"github.com/BegoniaHe/golua/token"
 )
 
 // NewNumber returns an ExpNode that represents the numeric literal in the given

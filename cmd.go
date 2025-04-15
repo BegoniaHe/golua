@@ -10,12 +10,12 @@ import (
 	"os"
 	"strings"
 
-	"github.com/arnodel/golua/ast"
-	"github.com/arnodel/golua/lib"
-	"github.com/arnodel/golua/lib/base"
-	"github.com/arnodel/golua/lib/debuglib"
-	"github.com/arnodel/golua/lib/iolib"
-	rt "github.com/arnodel/golua/runtime"
+	"github.com/BegoniaHe/golua/ast"
+	"github.com/BegoniaHe/golua/lib"
+	"github.com/BegoniaHe/golua/lib/base"
+	"github.com/BegoniaHe/golua/lib/debuglib"
+	"github.com/BegoniaHe/golua/lib/iolib"
+	rt "github.com/BegoniaHe/golua/runtime"
 )
 
 type luaCmd struct {

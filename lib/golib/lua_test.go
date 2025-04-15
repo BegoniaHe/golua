@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/arnodel/golua/lib"
-	"github.com/arnodel/golua/lib/golib"
-	"github.com/arnodel/golua/luatesting"
-	rt "github.com/arnodel/golua/runtime"
+	"github.com/BegoniaHe/golua/lib"
+	"github.com/BegoniaHe/golua/lib/golib"
+	"github.com/BegoniaHe/golua/luatesting"
+	rt "github.com/BegoniaHe/golua/runtime"
 )
 
 type TestStruct struct {

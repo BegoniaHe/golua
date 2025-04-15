@@ -1,7 +1,7 @@
 package ast
 
 import (
-	"github.com/arnodel/golua/token"
+	"github.com/BegoniaHe/golua/token"
 )
 
 // Nil is an expression node representing "nil".

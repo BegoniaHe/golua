@@ -6,7 +6,7 @@ import (
 	"errors"
 	"io"
 
-	"github.com/arnodel/golua/code"
+	"github.com/BegoniaHe/golua/code"
 )
 
 var marshalPrefix = []byte{6, 0, 4}
@@ -53,9 +53,7 @@ func UnmarshalConst(r io.Reader, budget uint64) (v Value, used uint64, err error
 	return v, budget - br.budget, br.err
 }
 
-//
 // bwriter: helper data struture to serialise values
-//
 type bwriter struct {
 	w   io.Writer
 	err error

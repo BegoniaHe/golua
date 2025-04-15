@@ -7,7 +7,7 @@ import (
 	"os"
 	"runtime"
 
-	"github.com/arnodel/golua/runtime/internal/luagc"
+	"github.com/BegoniaHe/golua/runtime/internal/luagc"
 )
 
 // A Runtime is a Lua runtime.  It contains all the global state of the runtime

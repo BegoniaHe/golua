@@ -6,7 +6,7 @@ import (
 	"io/ioutil"
 	"os"
 
-	rt "github.com/arnodel/golua/runtime"
+	rt "github.com/BegoniaHe/golua/runtime"
 )
 
 func OpenFile(r *rt.Runtime, name string, flag int, perm fs.FileMode) (*os.File, error) {

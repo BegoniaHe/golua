@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/arnodel/golua/ops"
+	"github.com/BegoniaHe/golua/ops"
 )
 
 // Instruction is the interface that all ir instruction types must implement.

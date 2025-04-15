@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"unsafe"
 
-	"github.com/arnodel/golua/code"
+	"github.com/BegoniaHe/golua/code"
 )
 
 // LuaCont is a Lua continuation, made from a closure, values for registers and

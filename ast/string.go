@@ -6,8 +6,8 @@ import (
 	"regexp"
 	"strconv"
 
-	"github.com/arnodel/golua/luastrings"
-	"github.com/arnodel/golua/token"
+	"github.com/BegoniaHe/golua/luastrings"
+	"github.com/BegoniaHe/golua/token"
 )
 
 // String is a string literal.

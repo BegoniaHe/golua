@@ -1,26 +1,31 @@
 // Package regexlib is an example of how to make a go library for lua.  It
 // allows using Go regular expressions in Lua code.  To use in a runtime r, add
 // the following Go code:
-//    regexlib.LibLoader.Run(r)
+//
+//	regexlib.LibLoader.Run(r)
+//
 // Then in Lua code e.g.
-//    regex = require"regex"
-//    ptn = regex.new("[0-9]+")
-//    match = ptn:find("hello there 123 yippee")
+//
+//	regex = require"regex"
+//	ptn = regex.new("[0-9]+")
+//	match = ptn:find("hello there 123 yippee")
 package regexlib
 
 import (
 	"fmt"
 	"regexp"
 
-	"github.com/arnodel/golua/lib/packagelib"
-	rt "github.com/arnodel/golua/runtime"
+	"github.com/BegoniaHe/golua/lib/packagelib"
+	rt "github.com/BegoniaHe/golua/runtime"
 )
 
 var regexMetaKey = rt.StringValue("regexMeta")
 
 // LibLoader defines the name of the package and how to load it. Given a runtime
 // r, call:
-//    regexlib.LibLoader.Run(r)
+//
+//	regexlib.LibLoader.Run(r)
+//
 // To load the package into the runtime (note that packagelib needs to be loaded
 // first).
 var LibLoader = packagelib.Loader{

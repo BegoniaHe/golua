@@ -1,8 +1,8 @@
 package ircomp
 
 import (
-	"github.com/arnodel/golua/code"
-	"github.com/arnodel/golua/ir"
+	"github.com/BegoniaHe/golua/code"
+	"github.com/BegoniaHe/golua/ir"
 )
 
 type ConstantCompiler struct {

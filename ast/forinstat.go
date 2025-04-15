@@ -1,7 +1,7 @@
 package ast
 
 import (
-	"github.com/arnodel/golua/token"
+	"github.com/BegoniaHe/golua/token"
 )
 
 // ForInStat is a statement node representing the "for Vars in Params do Body end"

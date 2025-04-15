@@ -3,7 +3,7 @@ package ir
 import (
 	"fmt"
 
-	"github.com/arnodel/golua/ops"
+	"github.com/BegoniaHe/golua/ops"
 )
 
 type Name string

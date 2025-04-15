@@ -1,8 +1,8 @@
 package ast
 
 import (
-	"github.com/arnodel/golua/ops"
-	"github.com/arnodel/golua/token"
+	"github.com/BegoniaHe/golua/ops"
+	"github.com/BegoniaHe/golua/token"
 )
 
 // A BinOp is a expression node that represents any binary operator.  The right

@@ -7,9 +7,9 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/arnodel/golua/lib/packagelib"
+	"github.com/BegoniaHe/golua/lib/packagelib"
 
-	rt "github.com/arnodel/golua/runtime"
+	rt "github.com/BegoniaHe/golua/runtime"
 )
 
 // LibLoader can load the table lib.

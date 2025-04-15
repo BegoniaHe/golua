@@ -3,8 +3,8 @@ package debuglib_test
 import (
 	"testing"
 
-	"github.com/arnodel/golua/lib"
-	"github.com/arnodel/golua/luatesting"
+	"github.com/BegoniaHe/golua/lib"
+	"github.com/BegoniaHe/golua/luatesting"
 )
 
 func TestDebugLib(t *testing.T) {

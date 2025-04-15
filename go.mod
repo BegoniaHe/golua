@@ -1,4 +1,4 @@
-module github.com/arnodel/golua
+module github.com/BegoniaHe/golua
 
 go 1.17
 
@@ -20,3 +20,5 @@ require (
 	golang.org/x/term v0.0.0-20201210144234-2321bbc49cbf // indirect
 	golang.org/x/text v0.3.6 // indirect
 )
+
+require github.com/arnodel/golua v0.1.0

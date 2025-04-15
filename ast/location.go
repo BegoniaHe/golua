@@ -1,6 +1,6 @@
 package ast
 
-import "github.com/arnodel/golua/token"
+import "github.com/BegoniaHe/golua/token"
 
 // A Location is a span between two token in the source code.
 type Location struct {

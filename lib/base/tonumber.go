@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"errors"
 
-	rt "github.com/arnodel/golua/runtime"
+	rt "github.com/BegoniaHe/golua/runtime"
 )
 
 func tonumber(t *rt.Thread, c *rt.GoCont) (rt.Cont, error) {

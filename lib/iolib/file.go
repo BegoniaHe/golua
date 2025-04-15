@@ -10,10 +10,10 @@ import (
 	"os"
 	"strings"
 
-	rt "github.com/arnodel/golua/runtime"
-	"github.com/arnodel/golua/safeio"
-	"github.com/arnodel/golua/scanner"
-	"github.com/arnodel/golua/token"
+	rt "github.com/BegoniaHe/golua/runtime"
+	"github.com/BegoniaHe/golua/safeio"
+	"github.com/BegoniaHe/golua/scanner"
+	"github.com/BegoniaHe/golua/token"
 )
 
 const (
@@ -34,7 +34,7 @@ var (
 type File struct {
 	file   *os.File
 	name   string
-	close func(*rt.Thread, *rt.GoCont) (rt.Cont, error)
+	close  func(*rt.Thread, *rt.GoCont) (rt.Cont, error)
 	status fileStatus
 	reader bufReader
 	writer bufWriter

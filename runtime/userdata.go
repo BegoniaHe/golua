@@ -1,6 +1,6 @@
 package runtime
 
-import "github.com/arnodel/golua/runtime/internal/luagc"
+import "github.com/BegoniaHe/golua/runtime/internal/luagc"
 
 type ResourceReleaser interface {
 	ReleaseResources()

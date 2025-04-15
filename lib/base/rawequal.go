@@ -1,7 +1,7 @@
 package base
 
 import (
-	rt "github.com/arnodel/golua/runtime"
+	rt "github.com/BegoniaHe/golua/runtime"
 )
 
 func rawequal(t *rt.Thread, c *rt.GoCont) (rt.Cont, error) {

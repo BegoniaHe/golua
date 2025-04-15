@@ -5,9 +5,9 @@ import (
 	"os"
 	"time"
 
-	"github.com/arnodel/golua/lib/packagelib"
-	rt "github.com/arnodel/golua/runtime"
-	"github.com/arnodel/golua/safeio"
+	"github.com/BegoniaHe/golua/lib/packagelib"
+	rt "github.com/BegoniaHe/golua/runtime"
+	"github.com/BegoniaHe/golua/safeio"
 	"github.com/arnodel/strftime"
 )
 

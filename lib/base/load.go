@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"errors"
 
-	rt "github.com/arnodel/golua/runtime"
+	rt "github.com/BegoniaHe/golua/runtime"
 )
 
 const maxChunkNameLen = 59

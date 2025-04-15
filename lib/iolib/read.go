@@ -4,7 +4,7 @@ import (
 	"errors"
 	"io"
 
-	rt "github.com/arnodel/golua/runtime"
+	rt "github.com/BegoniaHe/golua/runtime"
 )
 
 func ioread(t *rt.Thread, c *rt.GoCont) (rt.Cont, error) {

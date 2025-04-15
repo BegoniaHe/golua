@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/arnodel/golua/lib/packagelib"
-	"github.com/arnodel/golua/luastrings"
-	rt "github.com/arnodel/golua/runtime"
+	"github.com/BegoniaHe/golua/lib/packagelib"
+	"github.com/BegoniaHe/golua/luastrings"
+	rt "github.com/BegoniaHe/golua/runtime"
 )
 
 // LibLoader specifies how to load the string lib

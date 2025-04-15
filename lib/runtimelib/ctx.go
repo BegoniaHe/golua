@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	rt "github.com/arnodel/golua/runtime"
+	rt "github.com/BegoniaHe/golua/runtime"
 )
 
 var contextRegistryKey = rt.AsValue(contextRegistry{})

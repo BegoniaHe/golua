@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"reflect"
 
-	rt "github.com/arnodel/golua/runtime"
+	rt "github.com/BegoniaHe/golua/runtime"
 )
 
 // Index tries to find the value of the go value at "index" v. This could mean

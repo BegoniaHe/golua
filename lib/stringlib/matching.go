@@ -7,9 +7,9 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/arnodel/golua/lib/stringlib/pattern"
-	"github.com/arnodel/golua/luastrings"
-	rt "github.com/arnodel/golua/runtime"
+	"github.com/BegoniaHe/golua/lib/stringlib/pattern"
+	"github.com/BegoniaHe/golua/luastrings"
+	rt "github.com/BegoniaHe/golua/runtime"
 )
 
 func find(t *rt.Thread, c *rt.GoCont) (rt.Cont, error) {

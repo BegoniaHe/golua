@@ -1,19 +1,19 @@
 package lib
 
 import (
-	"github.com/arnodel/golua/lib/base"
-	"github.com/arnodel/golua/lib/coroutine"
-	"github.com/arnodel/golua/lib/debuglib"
-	"github.com/arnodel/golua/lib/golib"
-	"github.com/arnodel/golua/lib/iolib"
-	"github.com/arnodel/golua/lib/mathlib"
-	"github.com/arnodel/golua/lib/oslib"
-	"github.com/arnodel/golua/lib/packagelib"
-	"github.com/arnodel/golua/lib/runtimelib"
-	"github.com/arnodel/golua/lib/stringlib"
-	"github.com/arnodel/golua/lib/tablelib"
-	"github.com/arnodel/golua/lib/utf8lib"
-	rt "github.com/arnodel/golua/runtime"
+	"github.com/BegoniaHe/golua/lib/base"
+	"github.com/BegoniaHe/golua/lib/coroutine"
+	"github.com/BegoniaHe/golua/lib/debuglib"
+	"github.com/BegoniaHe/golua/lib/golib"
+	"github.com/BegoniaHe/golua/lib/iolib"
+	"github.com/BegoniaHe/golua/lib/mathlib"
+	"github.com/BegoniaHe/golua/lib/oslib"
+	"github.com/BegoniaHe/golua/lib/packagelib"
+	"github.com/BegoniaHe/golua/lib/runtimelib"
+	"github.com/BegoniaHe/golua/lib/stringlib"
+	"github.com/BegoniaHe/golua/lib/tablelib"
+	"github.com/BegoniaHe/golua/lib/utf8lib"
+	rt "github.com/BegoniaHe/golua/runtime"
 )
 
 func LoadLibs(r *rt.Runtime, loaders ...packagelib.Loader) func() {

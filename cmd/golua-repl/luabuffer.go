@@ -7,10 +7,10 @@ import (
 	"regexp"
 	"strings"
 
+	"github.com/BegoniaHe/golua/lib"
+	"github.com/BegoniaHe/golua/luastrings"
+	"github.com/BegoniaHe/golua/runtime"
 	"github.com/arnodel/edit"
-	"github.com/arnodel/golua/lib"
-	"github.com/arnodel/golua/luastrings"
-	"github.com/arnodel/golua/runtime"
 )
 
 type luaLineType uint8

@@ -10,8 +10,8 @@ import (
 	"runtime"
 	"syscall"
 
-	"github.com/arnodel/golua/lib/packagelib"
-	rt "github.com/arnodel/golua/runtime"
+	"github.com/BegoniaHe/golua/lib/packagelib"
+	rt "github.com/BegoniaHe/golua/runtime"
 )
 
 // BufferedStdFiles sets wether std files should be buffered
@@ -410,20 +410,20 @@ func popen(t *rt.Thread, c *rt.GoCont) (rt.Cont, error) {
 	f := &File{
 		writer: &nobufWriter{inDummy},
 		reader: &nobufReader{outDummy},
-		name: cmdStr,
+		name:   cmdStr,
 	}
 
 	var stdout io.ReadCloser
 	var stdin io.WriteCloser
 	switch mode {
-		case "r":
-			stdout, err = cmd.StdoutPipe()
-			f.reader = bufio.NewReader(stdout)
-		case "w":
-			stdin, err = cmd.StdinPipe()
-			f.writer = bufio.NewWriterSize(stdin, 65536)
-		default:
-			err = errors.New("invalid mode")
+	case "r":
+		stdout, err = cmd.StdoutPipe()
+		f.reader = bufio.NewReader(stdout)
+	case "w":
+		stdin, err = cmd.StdinPipe()
+		f.writer = bufio.NewWriterSize(stdin, 65536)
+	default:
+		err = errors.New("invalid mode")
 	}
 	// called *only* from io.close
 	f.close = func(t *rt.Thread, c *rt.GoCont) (rt.Cont, error) {
@@ -431,7 +431,7 @@ func popen(t *rt.Thread, c *rt.GoCont) (rt.Cont, error) {
 		if err != nil {
 			return pushingNextIoResult(t.Runtime, c, err)
 		}
-	
+
 		if stdout != nil {
 			err := stdout.Close()
 			if err != nil {

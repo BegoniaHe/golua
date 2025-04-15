@@ -6,7 +6,7 @@ package runtime
 import (
 	"fmt"
 
-	"github.com/arnodel/golua/runtime/internal/luagc"
+	"github.com/BegoniaHe/golua/runtime/internal/luagc"
 )
 
 const QuotasAvailable = false

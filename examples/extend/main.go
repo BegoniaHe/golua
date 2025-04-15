@@ -3,17 +3,17 @@ package main
 import (
 	"os"
 
-	"github.com/arnodel/golua/lib/base"
-	rt "github.com/arnodel/golua/runtime"
+	"github.com/BegoniaHe/golua/lib/base"
+	rt "github.com/BegoniaHe/golua/runtime"
 )
 
 // This is the Go function that we are going to call from Lua. Its inputs are:
 //
 // - t: the thread the function is running in.
 //
-// - c: the go continuation that represents the context the function is called
-//      in.  It contains the arguments to the function and the next continuation
-//      (the one which receives the values computed by this function).
+//   - c: the go continuation that represents the context the function is called
+//     in.  It contains the arguments to the function and the next continuation
+//     (the one which receives the values computed by this function).
 //
 // It returns the next continuation on success, else an error.
 func addints(t *rt.Thread, c *rt.GoCont) (rt.Cont, error) {

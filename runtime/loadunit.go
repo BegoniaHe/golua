@@ -3,7 +3,7 @@ package runtime
 import (
 	"unsafe"
 
-	"github.com/arnodel/golua/code"
+	"github.com/BegoniaHe/golua/code"
 )
 
 // Code represents the code for a Lua function together with all the constants

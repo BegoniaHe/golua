@@ -5,9 +5,9 @@ import (
 	"io"
 	"testing"
 
-	"github.com/arnodel/golua/lib"
-	"github.com/arnodel/golua/luatesting"
-	rt "github.com/arnodel/golua/runtime"
+	"github.com/BegoniaHe/golua/lib"
+	"github.com/BegoniaHe/golua/luatesting"
+	rt "github.com/BegoniaHe/golua/runtime"
 )
 
 func TestRuntime(t *testing.T) {

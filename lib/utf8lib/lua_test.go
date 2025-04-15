@@ -3,8 +3,8 @@ package utf8lib_test
 import (
 	"testing"
 
-	"github.com/arnodel/golua/lib"
-	"github.com/arnodel/golua/luatesting"
+	"github.com/BegoniaHe/golua/lib"
+	"github.com/BegoniaHe/golua/luatesting"
 )
 
 func TestUtf8Lib(t *testing.T) {
