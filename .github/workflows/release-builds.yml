@@ -1,7 +1,6 @@
 name: Release Builds
 
 on:
-  # 允许手动从Actions标签页触发
   workflow_dispatch:
 
 jobs:
@@ -44,7 +43,7 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
-          go-version: 1.23
+          go-version: '1.20'
 
       - name: Build
         env:
@@ -61,24 +60,60 @@ jobs:
           if-no-files-found: error
           retention-days: 7
           
-  # 创建一个合并所有文件的job
-  collect:
+  # 创建一个合并所有文件的job，并发布为pre-release
+  release:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
       - name: Download all artifacts
         uses: actions/download-artifact@v4
         with:
           path: ./binaries
+      
+      - name: Create release directory
+        run: mkdir -p release
           
-      - name: Zip binaries
+      - name: Prepare release files
         run: |
-          cd ./binaries
-          zip -r ../golua-all-platforms.zip ./*
+          # 将所有二进制文件移动到release目录
+          find ./binaries -type f -not -path "*/\.*" -exec cp {} ./release/ \;
           
-      - name: Upload combined zip
-        uses: actions/upload-artifact@v4
+          # 创建一个包含所有二进制文件的zip
+          cd ./release
+          zip -r ../golua-all-platforms.zip *
+          cd ..
+          
+          # 将zip文件也放入release目录
+          cp golua-all-platforms.zip ./release/
+      
+      - name: Get current date
+        id: date
+        run: echo "DATE=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+      
+      - name: Delete existing pre-release
+        uses: dev-drprasad/delete-tag-and-release@v1.0
         with:
-          name: golua-all-platforms
-          path: golua-all-platforms.zip
-          retention-days: 7
+          tag_name: pre-release
+          delete_release: true
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+        continue-on-error: true
+      
+      - name: Create pre-release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: "Development Build (${{ steps.date.outputs.DATE }})"
+          tag_name: pre-release
+          files: ./release/*
+          prerelease: true
+          generate_release_notes: true
+          body: |
+            This is an automatically generated pre-release build.
+            
+            Build date: ${{ steps.date.outputs.DATE }}
+            
+            This pre-release will be automatically overwritten by newer builds.
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
