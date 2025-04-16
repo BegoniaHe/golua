@@ -236,6 +236,7 @@ func scanLongString(l *Scanner) stateFn {
 
 var kwType = map[string]token.Type{
 	"break":    token.KwBreak,
+	"continue": token.KwContinue,
 	"goto":     token.KwGoto,
 	"do":       token.KwDo,
 	"while":    token.KwWhile,

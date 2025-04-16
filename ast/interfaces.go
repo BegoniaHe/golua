@@ -49,6 +49,7 @@ type StatProcessor interface {
 	ProcessAssignStat(AssignStat)
 	ProcessBlockStat(BlockStat)
 	ProcessBreakStat(BreakStat)
+	ProcessContinueStat(ContinueStat)
 	ProcessEmptyStat(EmptyStat)
 	ProcessForInStat(ForInStat)
 	ProcessForStat(ForStat)

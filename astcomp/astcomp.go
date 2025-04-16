@@ -45,6 +45,7 @@ func (c *compiler) NewChild(name string) *compiler {
 // Names of various labels and registers used during compilation.
 const (
 	breakLblName    = ir.Name("<break>")
+	continueLblName = ir.Name("<continue>")
 	ellipsisRegName = ir.Name("...")
 	callerRegName   = ir.Name("<caller>")
 	loopFRegName    = ir.Name("<f>")

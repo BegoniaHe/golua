@@ -102,6 +102,8 @@ func (p *Parser) Stat(t *token.Token) (ast.Stat, *token.Token) {
 		return ast.NewEmptyStat(t), p.Scan()
 	case token.KwBreak:
 		return ast.NewBreakStat(t), p.Scan()
+	case token.KwContinue:
+		return ast.NewContinueStat(t), p.Scan()
 	case token.KwGoto:
 		dest := p.Scan()
 		expectIdent(dest)

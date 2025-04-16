@@ -30,6 +30,7 @@ const (
 	IDENT
 
 	KwBreak
+	KwContinue
 	KwGoto
 	KwDo
 	KwWhile

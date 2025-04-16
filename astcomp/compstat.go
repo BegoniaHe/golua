@@ -36,6 +36,11 @@ func (c *compiler) ProcessBreakStat(s ast.BreakStat) {
 	c.emitJump(s, breakLblName)
 }
 
+// ProcessContinueStat compiles a ContinueStat.
+func (c *compiler) ProcessContinueStat(s ast.ContinueStat) {
+	c.emitJump(s, continueLblName)
+}
+
 // ProcessEmptyStat compiles a EmptyStat.
 func (c *compiler) ProcessEmptyStat(s ast.EmptyStat) {
 	// Nothing to compile!
@@ -58,6 +63,7 @@ func (c *compiler) ProcessForInStat(s ast.ForInStat) {
 
 	loopLbl := c.GetNewLabel()
 	must(c.EmitLabelNoLine(loopLbl))
+	continueLbl := c.DeclareGotoLabelNoLine(continueLblName)
 
 	nameAttribs := make([]ast.NameAttrib, len(s.Vars))
 	for i, name := range s.Vars {
@@ -89,11 +95,11 @@ func (c *compiler) ProcessForInStat(s ast.ForInStat) {
 	c.emitInstr(s, ir.Transform{Dst: varReg, Op: ops.OpId, Src: var1})
 	c.compileBlock(s.Body)
 
+	must(c.EmitLabelNoLine(continueLbl))
 	c.emitInstr(s, ir.Jump{Label: loopLbl})
 
 	must(c.EmitGotoLabel(breakLblName))
 	c.PopContext()
-
 }
 
 // ProcessForStat compiles a ForStat.
@@ -127,6 +133,7 @@ func (c *compiler) ProcessForStat(s ast.ForStat) {
 	c.PushContext()
 	loopLbl := c.GetNewLabel()
 	must(c.EmitLabelNoLine(loopLbl))
+	continueLbl := c.DeclareGotoLabelNoLine(continueLblName)
 	endLbl := c.DeclareGotoLabelNoLine(breakLblName)
 
 	// If startReg is nil, then there are no iterations in the loop
@@ -144,6 +151,9 @@ func (c *compiler) ProcessForStat(s ast.ForStat) {
 	ir.EmitMoveNoLine(c.CodeBuilder, iterReg, startReg)
 	c.DeclareLocal(ir.Name(s.Var.Val), iterReg)
 	c.compileBlock(s.Body)
+
+	must(c.EmitLabelNoLine(continueLbl))
+
 	c.PopContext()
 
 	//Advance the for loop
@@ -249,8 +259,11 @@ func (c *compiler) ProcessRepeatStat(s ast.RepeatStat) {
 	c.DeclareGotoLabelNoLine(breakLblName)
 
 	loopLbl := c.GetNewLabel()
+	continueLbl := c.DeclareGotoLabelNoLine(continueLblName)
 	must(c.EmitLabelNoLine(loopLbl))
 	pop := c.compileBlockNoPop(s.Body, false)
+	must(c.EmitLabelNoLine(continueLbl))
+
 	condReg := c.compileExpNoDestHint(s.Cond)
 	negReg := c.GetFreeRegister()
 	c.emitInstr(s.Cond, ir.Transform{
@@ -272,9 +285,11 @@ func (c *compiler) ProcessRepeatStat(s ast.RepeatStat) {
 func (c *compiler) ProcessWhileStat(s ast.WhileStat) {
 	c.PushContext()
 	stopLbl := c.DeclareGotoLabelNoLine(breakLblName)
+	continueLbl := c.DeclareGotoLabelNoLine(continueLblName)
 
 	loopLbl := c.GetNewLabel()
 	must(c.EmitLabelNoLine(loopLbl))
+	must(c.EmitLabelNoLine(continueLbl))
 
 	c.compileCond(s.CondStat, stopLbl)
 
