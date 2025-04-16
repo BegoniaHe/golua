@@ -6,7 +6,7 @@ package oslib
 import (
 	"time"
 
-	rt "github.com/arnodel/golua/runtime"
+	rt "github.com/BegoniaHe/golua/runtime"
 )
 
 var startTime time.Time
