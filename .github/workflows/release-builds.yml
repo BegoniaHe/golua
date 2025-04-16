@@ -60,7 +60,6 @@ jobs:
           if-no-files-found: error
           retention-days: 7
           
-  # 创建一个合并所有文件的job，并发布为pre-release
   release:
     needs: build
     runs-on: ubuntu-latest
@@ -113,7 +112,7 @@ jobs:
             This is an automatically generated pre-release build.
             
             Build date: ${{ steps.date.outputs.DATE }}
+            Build commit: ${{ github.sha }}
             
-            This pre-release will be automatically overwritten by newer builds.
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
