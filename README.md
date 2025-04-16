@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.com/arnodel/golua.svg?branch=master)](https://travis-ci.com/arnodel/golua)
-[![Go Report Card](https://goreportcard.com/badge/github.com/arnodel/golua)](https://goreportcard.com/report/github.com/arnodel/golua)
-[![Coverage](https://codecov.io/gh/arnodel/golua/branch/master/graph/badge.svg)](https://codecov.io/gh/arnodel/golua)
+[![Build Status](https://travis-ci.com/BegoniaHe/golua.svg?branch=master)](https://travis-ci.com/BegoniaHe/golua)
+[![Go Report Card](https://goreportcard.com/badge/github.com/BegoniaHe/golua)](https://goreportcard.com/report/github.com/BegoniaHe/golua)
+[![Coverage](https://codecov.io/gh/BegoniaHe/golua/branch/master/graph/badge.svg)](https://codecov.io/gh/BegoniaHe/golua)
 
 # GoLua
 

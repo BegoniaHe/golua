@@ -21,4 +21,4 @@ require (
 	golang.org/x/text v0.3.6 // indirect
 )
 
-require github.com/arnodel/golua v0.1.0
+require github.com/arnodel/golua v0.1.0 // indirect
