@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/BegoniaHe/golua.svg?branch=master)](https://travis-ci.com/BegoniaHe/golua)
+[![Build Status](https://travis-ci.com/BegoniaHe/golua.svg?branch=master)](https://travis-ci.com/BegoniaHe/golua.svg?branch=master)
 [![Go Report Card](https://goreportcard.com/badge/github.com/BegoniaHe/golua)](https://goreportcard.com/report/github.com/BegoniaHe/golua)
 [![Coverage](https://codecov.io/gh/BegoniaHe/golua/branch/master/graph/badge.svg)](https://codecov.io/gh/BegoniaHe/golua)
 
