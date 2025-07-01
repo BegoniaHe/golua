@@ -20,7 +20,7 @@ func rawlen(t *rt.Thread, c *rt.GoCont) (rt.Cont, error) {
 		t.Push1(next, rt.IntValue(x.AsTable().Len()))
 		return next, nil
 	default:
-		log.Printf("rawlen: unknown type: %s", x.Type())
+		log.Printf("rawlen: unknown type: %s", x.TypeName())
 	}
 	return nil, errors.New("#1 must be a string or table")
 }
