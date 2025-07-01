@@ -22,12 +22,13 @@ func dump(t *rt.Thread, c *rt.GoCont) (rt.Cont, error) {
 	_ = strip
 	var w bytes.Buffer
 	code := t.RefactorCodeConsts(cl.Code)
-	used, mErr := rt.MarshalConst(&w, rt.CodeValue(code), t.LinearUnused(10))
+	//used, mErr := rt.MarshalConst(&w, rt.CodeValue(code), t.LinearUnused(10))
+	used, _ := rt.MarshalConst(&w, rt.CodeValue(code), t.LinearUnused(10))
 	// This will cause a panic if MarshalConst was interupted, so no need to
 	// worry about the rest of this codepath in this case.
 	t.LinearRequire(10, used)
-	if err != nil {
+	/*if err != nil {
 		return nil, mErr
-	}
+	}*/
 	return c.PushingNext1(t.Runtime, rt.StringValue(w.String())), nil
 }

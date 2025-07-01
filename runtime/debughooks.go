@@ -4,13 +4,13 @@ package runtime
 Debug hooks.  For call/return, it's a bit complicated.  The logic is split
 between
 
-- LuaCont.RunInThread(): when exiting, a call / tailcall / return event is
+- LuaCont.RunInThread(): when exiting, a call / tail call / return event is
   emitted
 - GoCont.RuntInThread(): when exiting, a return event is emitted
 - Thread.RunContinuation: at the start (before the loop), a call event is
   emitted
 
-It's unfortunate it has to be split like this but I cannot find a better
+It's unfortunate it has to be split like this, but I cannot find a better
 approach.
 */
 

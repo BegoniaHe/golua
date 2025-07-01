@@ -109,7 +109,12 @@ func (p *UnsafePool) ExtractPendingFinalize() []Value {
 
 	// Lua wants to run finalizers in reverse order
 	sort.Sort(pending)
-	return pending.vals()
+
+	if values := pending.vals(); values == nil {
+		return make([]Value, 0)
+	} else {
+		return values
+	}
 }
 
 func (p *UnsafePool) ExtractPendingRelease() []Value {
@@ -130,7 +135,7 @@ func (p *UnsafePool) ExtractPendingRelease() []Value {
 	return pending.vals()
 }
 
-// ExtractAllMarkedFinalized returns all the values that have been marked for
+// ExtractAllMarkedFinalize ExtractAllMarkedFinalized returns all the values that have been marked for
 // finalizing, even if their go finalizer hasn't run yet.  This is useful e.g.
 // when closing a runtime, to run all pending finalizers.
 func (p *UnsafePool) ExtractAllMarkedFinalize() []Value {
@@ -158,7 +163,11 @@ func (p *UnsafePool) ExtractAllMarkedFinalize() []Value {
 
 	// Sort in reverse order
 	sort.Sort(marked)
-	return marked.vals()
+	if values := marked.vals(); values == nil {
+		return make([]Value, 0)
+	} else {
+		return values
+	}
 }
 
 // ExtractAllMarkedRelease returns all the values that have been marked for

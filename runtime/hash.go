@@ -36,12 +36,12 @@ func goRuntimeEfaceHash(i interface{}, seed uintptr) uintptr {
 
 //go:linkname memhash64 runtime.memhash64
 //go:noescape
-func memhash64(p unsafe.Pointer, h uintptr) uintptr
+func memhash64(_ unsafe.Pointer, _ uintptr) uintptr
 
 //go:linkname nilinterhash runtime.nilinterhash
 //go:noescape
-func nilinterhash(p unsafe.Pointer, h uintptr) uintptr
+func nilinterhash(_ unsafe.Pointer, _ uintptr) uintptr
 
 //go:linkname noescape runtime.noescape
 //go:noescape
-func noescape(p unsafe.Pointer) unsafe.Pointer
+func noescape(_ unsafe.Pointer) unsafe.Pointer

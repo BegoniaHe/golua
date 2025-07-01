@@ -382,7 +382,7 @@ func (r *Runtime) CompileLuaChunk(name string, source []byte, scannerOptions ...
 	return r.compileLuaStat(name, stat, statSize)
 }
 
-// CompileAndLoadLuaChunk parses, compiles and loads a Lua chunk from source and
+// CompileAndLoadLuaChunkOrExp CompileAndLoadLuaChunk parses, compiles and loads a Lua chunk from source and
 // returns the closure that runs the chunk in the given global environment.
 func (r *Runtime) CompileAndLoadLuaChunkOrExp(name string, source []byte, env Value, scannerOptions ...scanner.Option) (*Closure, error) {
 	unit, unitSize, err := r.CompileLuaChunkOrExp(name, source, scannerOptions...)
@@ -425,15 +425,15 @@ func (r *Runtime) LoadFromSourceOrCode(name string, source []byte, mode string, 
 		if err != nil {
 			return nil, err
 		}
-		code, ok := k.TryCode()
+		c, ok := k.TryCode()
 		if !ok {
-			return nil, errors.New("Expected function to load")
+			return nil, errors.New("expected function to load")
 		}
-		clos := NewClosure(r, code)
-		if code.UpvalueCount > 0 {
+		clos := NewClosure(r, c)
+		if c.UpvalueCount > 0 {
 			clos.AddUpvalue(newCell(env))
-			r.RequireCPU(uint64(code.UpvalueCount))
-			for i := int16(1); i < code.UpvalueCount; i++ {
+			r.RequireCPU(uint64(c.UpvalueCount))
+			for i := int16(1); i < c.UpvalueCount; i++ {
 				clos.AddUpvalue(newCell(NilValue))
 			}
 		}
