@@ -326,12 +326,12 @@ func reflectToValue(v reflect.Value, meta *rt.Table) rt.Value {
 		return rt.BoolValue(v.Bool())
 	case reflect.Slice:
 		if v.IsNil() {
-
 			return rt.NilValue
 		}
 		if v.Type().Elem().Kind() == reflect.Uint8 {
 			return rt.StringValue(string(v.Interface().([]byte)))
 		}
+		return rt.UserDataValue(rt.NewUserData(v.Interface(), meta))
 	case reflect.Ptr:
 		if v.IsNil() {
 			return rt.NilValue
@@ -350,7 +350,6 @@ func reflectToValue(v reflect.Value, meta *rt.Table) rt.Value {
 		fallthrough
 	default:
 		log.Printf("unable to convert reflect.Value of kind %s to golua Value", v.Kind().String())
-
+		return rt.UserDataValue(rt.NewUserData(v.Interface(), meta))
 	}
-	return rt.UserDataValue(rt.NewUserData(v.Interface(), meta))
 }
