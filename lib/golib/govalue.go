@@ -343,11 +343,7 @@ func reflectToValue(v reflect.Value, meta *rt.Table) rt.Value {
 			return rt.NilValue
 		}
 	default:
-		if v.Type().Implements(runtimeValueType) {
-			return v.Interface().(rt.Value)
-		} else {
-			log.Fatalf("reflectToValue: unknown type %s for value %v", v.Kind(), v.Interface())
-		}
+		log.Printf("unable to convert reflect.Value of kind %s to golua Value", v.Kind().String())
 
 	}
 	return rt.UserDataValue(rt.NewUserData(v.Interface(), meta))
