@@ -4,6 +4,7 @@ import (
 	crypto "crypto/rand"
 	"encoding/binary"
 	"errors"
+	olog "log"
 	"math"
 	"math/rand"
 
@@ -37,8 +38,8 @@ func load(r *rt.Runtime) (rt.Value, func()) {
 		r.SetEnvGoFunc(pkg, "floor", floor, 1, false),
 		r.SetEnvGoFunc(pkg, "fmod", fmod, 2, false),
 		r.SetEnvGoFunc(pkg, "log", log, 2, false),
-		r.SetEnvGoFunc(pkg, "max", max, 1, true),
-		r.SetEnvGoFunc(pkg, "min", min, 1, true),
+		r.SetEnvGoFunc(pkg, "max", luamax, 1, true),
+		r.SetEnvGoFunc(pkg, "min", luamin, 1, true),
 		r.SetEnvGoFunc(pkg, "modf", modf, 1, false),
 		r.SetEnvGoFunc(pkg, "rad", rad, 1, false),
 		r.SetEnvGoFunc(pkg, "random", random, 2, false),
@@ -234,7 +235,7 @@ func log(t *rt.Thread, c *rt.GoCont) (rt.Cont, error) {
 	return c.PushingNext1(t.Runtime, rt.FloatValue(y)), nil
 }
 
-func max(t *rt.Thread, c *rt.GoCont) (rt.Cont, error) {
+func luamax(t *rt.Thread, c *rt.GoCont) (rt.Cont, error) {
 	if err := c.Check1Arg(); err != nil {
 		return nil, err
 	}
@@ -251,7 +252,7 @@ func max(t *rt.Thread, c *rt.GoCont) (rt.Cont, error) {
 	return c.PushingNext1(t.Runtime, x), nil
 }
 
-func min(t *rt.Thread, c *rt.GoCont) (rt.Cont, error) {
+func luamin(t *rt.Thread, c *rt.GoCont) (rt.Cont, error) {
 	if err := c.Check1Arg(); err != nil {
 		return nil, err
 	}
@@ -381,6 +382,7 @@ func randomseed(t *rt.Thread, c *rt.GoCont) (rt.Cont, error) {
 		// In Go the seed is only 64 bits so we mangle the seeds
 		seed ^= seed2
 	}
+	// Deprecated: rand.Seed(seed)
 	rand.Seed(seed)
 	return c.PushingNext(t.Runtime, rt.IntValue(seed), rt.IntValue(0)), nil
 }
@@ -442,6 +444,25 @@ func typef(t *rt.Thread, c *rt.GoCont) (rt.Cont, error) {
 		tp = rt.StringValue("integer")
 	case rt.FloatType:
 		tp = rt.StringValue("float")
+	case rt.StringType:
+		tp = rt.StringValue("string")
+	case rt.NilType:
+		tp = rt.StringValue("nil")
+	case rt.BoolType:
+		tp = rt.StringValue("boolean")
+	case rt.CodeType:
+		tp = rt.StringValue("function")
+	case rt.TableType:
+		tp = rt.StringValue("table")
+	case rt.FunctionType:
+		tp = rt.StringValue("function")
+	case rt.ThreadType:
+		tp = rt.StringValue("thread")
+	case rt.UserDataType:
+		tp = rt.StringValue("userdata")
+	case rt.UnknownType:
+		tp = rt.StringValue("unknown")
+		olog.Printf("typef: unknown type: %s", c.Arg(0).TypeName())
 	}
 	return c.PushingNext1(t.Runtime, tp), nil
 }

@@ -3,6 +3,7 @@ package golib
 import (
 	"errors"
 	"fmt"
+	"log"
 	"reflect"
 
 	rt "github.com/BegoniaHe/golua/runtime"
@@ -16,13 +17,13 @@ func goIndex(t *rt.Thread, u *rt.UserData, key rt.Value) (rt.Value, error) {
 	field, ok := key.ToString()
 	if ok {
 		// First try a method
-		m := gv.MethodByName(string(field))
+		m := gv.MethodByName(field)
 		if m != (reflect.Value{}) {
 			return reflectToValue(m, meta), nil
 		}
 		if gv.CanAddr() {
 			// Is that even possible?
-			m = gv.Addr().MethodByName(string(field))
+			m = gv.Addr().MethodByName(field)
 			if m != (reflect.Value{}) {
 				return reflectToValue(m, meta), nil
 			}
@@ -39,7 +40,7 @@ func goIndex(t *rt.Thread, u *rt.UserData, key rt.Value) (rt.Value, error) {
 		if !ok {
 			return rt.NilValue, errors.New("can only index a struct with a string")
 		}
-		f := gv.FieldByName(string(field))
+		f := gv.FieldByName(field)
 		if f != (reflect.Value{}) {
 			return reflectToValue(f, meta), nil
 		}
@@ -59,6 +60,8 @@ func goIndex(t *rt.Thread, u *rt.UserData, key rt.Value) (rt.Value, error) {
 			return rt.NilValue, errors.New("index out of slice bounds")
 		}
 		return reflectToValue(gv.Index(int(i)), meta), nil
+	default:
+		log.Printf("goIndex: unknown type %s for value %v", gv.Kind(), u.Value())
 	}
 	return rt.NilValue, errors.New("unable to index")
 }
@@ -79,7 +82,7 @@ func goSetIndex(t *rt.Thread, u *rt.UserData, key rt.Value, val rt.Value) error 
 		if !ok {
 			return errors.New("can only set struct index for a string")
 		}
-		f := gv.FieldByName(string(field))
+		f := gv.FieldByName(field)
 		if f == (reflect.Value{}) {
 			return errors.New("struct does not have field: " + string(field))
 		}
@@ -117,6 +120,8 @@ func goSetIndex(t *rt.Thread, u *rt.UserData, key rt.Value, val rt.Value) error 
 		}
 		gv.Index(int(i)).Set(goVal)
 		return nil
+	default:
+		log.Printf("goSetIndex: unknown type %s for value %v", gv.Kind(), u.Value())
 	}
 	return errors.New("unable to set index")
 }
@@ -193,7 +198,7 @@ func fillStruct(t *rt.Thread, s reflect.Value, v rt.Value) error {
 		if !ok {
 			return errors.New("fillStruct: table fields must be strings")
 		}
-		field := s.FieldByName(string(name))
+		field := s.FieldByName(name)
 		if field == (reflect.Value{}) {
 			return fmt.Errorf("fillStruct: field %q does not exist in struct", name)
 		}
@@ -274,12 +279,12 @@ func valueToType(t *rt.Thread, v rt.Value, tp reflect.Type) (reflect.Value, erro
 	case reflect.Float64:
 		x, ok := rt.ToFloat(v)
 		if ok {
-			return reflect.ValueOf(float64(x)), nil
+			return reflect.ValueOf(x), nil
 		}
 	case reflect.String:
 		x, ok := v.ToString()
 		if ok {
-			return reflect.ValueOf(string(x)), nil
+			return reflect.ValueOf(x), nil
 		}
 	case reflect.Bool:
 		return reflect.ValueOf(rt.Truth(v)), nil
@@ -295,6 +300,8 @@ func valueToType(t *rt.Thread, v rt.Value, tp reflect.Type) (reflect.Value, erro
 		if reflect.TypeOf(iface).Implements(tp) {
 			return reflect.ValueOf(iface), nil
 		}
+	default:
+		log.Fatalf("unknown type: %s", tp.Kind())
 	}
 	return reflect.Value{}, fmt.Errorf("%+v cannot be converted to %s", v, tp.Name())
 }
@@ -335,6 +342,13 @@ func reflectToValue(v reflect.Value, meta *rt.Table) rt.Value {
 		if v.IsNil() {
 			return rt.NilValue
 		}
+	default:
+		if v.Type().Implements(runtimeValueType) {
+			return v.Interface().(rt.Value)
+		} else {
+			log.Fatalf("reflectToValue: unknown type %s for value %v", v.Kind(), v.Interface())
+		}
+
 	}
 	return rt.UserDataValue(rt.NewUserData(v.Interface(), meta))
 }

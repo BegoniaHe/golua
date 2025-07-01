@@ -2,6 +2,7 @@ package base
 
 import (
 	"errors"
+	"log"
 
 	rt "github.com/BegoniaHe/golua/runtime"
 )
@@ -18,6 +19,8 @@ func rawlen(t *rt.Thread, c *rt.GoCont) (rt.Cont, error) {
 	case rt.TableType:
 		t.Push1(next, rt.IntValue(x.AsTable().Len()))
 		return next, nil
+	default:
+		log.Printf("rawlen: unknown type: %s", x.Type())
 	}
 	return nil, errors.New("#1 must be a string or table")
 }

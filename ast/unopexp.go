@@ -3,6 +3,7 @@ package ast
 import (
 	"github.com/BegoniaHe/golua/ops"
 	"github.com/BegoniaHe/golua/token"
+	"log"
 )
 
 // An UnOp is an expression node representing the application of a unary
@@ -42,6 +43,8 @@ func (u UnOp) isNumber() bool {
 	switch u.Op {
 	case ops.OpNeg, ops.OpId:
 		return IsNumber(u.Operand)
+	default:
+		log.Fatalf("unop: %s is not a number operation", u.Op)
 	}
 	return false
 }

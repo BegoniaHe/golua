@@ -28,3 +28,6 @@ writetest*.txt
 
 # The build product
 golua
+
+# idea project files
+.idea/

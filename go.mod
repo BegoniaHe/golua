@@ -2,10 +2,7 @@ module github.com/BegoniaHe/golua
 
 go 1.17
 
-require (
-	github.com/arnodel/edit v0.0.0-20220202110212-dfc8d7a13890 // Only needed when building cmd/golua-repl
-	github.com/arnodel/strftime v0.1.6
-)
+require github.com/arnodel/edit v0.0.0-20220202110212-dfc8d7a13890 // Only needed when building cmd/golua-repl
 
 // Indirect dependencies pulled by github.com/arnodel/edit for cmd/golua-repl,
 // not used by core packages.
@@ -21,4 +18,7 @@ require (
 	golang.org/x/text v0.3.6 // indirect
 )
 
-require github.com/arnodel/golua v0.1.0 // indirect
+require (
+	github.com/arnodel/golua v0.1.0 // indirect
+	github.com/arnodel/strftime v0.1.6 // indirect
+)

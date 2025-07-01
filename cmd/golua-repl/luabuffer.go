@@ -151,7 +151,7 @@ func (b *LuaBuffer) MergeLineWithPrevious(l int) error {
 		return err
 	}
 	l2.Runes = l2.Runes[2:]
-	b.buf.SetLine(l, l2)
+	err = b.buf.SetLine(l, l2)
 	return b.buf.MergeLineWithPrevious(l)
 }
 

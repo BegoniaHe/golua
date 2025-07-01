@@ -8,7 +8,7 @@ import (
 	"github.com/BegoniaHe/golua/lib/packagelib"
 	rt "github.com/BegoniaHe/golua/runtime"
 	"github.com/BegoniaHe/golua/safeio"
-	"github.com/arnodel/strftime"
+	"github.com/BegoniaHe/golua/strftime"
 )
 
 // LibLoader can load the os lib.

@@ -4,7 +4,7 @@ import (
 	_ "embed"
 	"flag"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"log"
 	"os"
 
@@ -22,11 +22,17 @@ func main() {
 
 	// Log to a file because the terminal is used
 	// f, err := os.OpenFile("testlogfile", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
-	f, err := ioutil.TempFile("", "golua-repl.logs.")
+	// Deprecated: f, err := ioutil.TempFile("", "golua-repl.logs.")
+	f, err := os.CreateTemp("", "golua-repl.logs.")
 	if err != nil {
 		log.Fatalf("error opening file: %s", err)
 	}
-	defer f.Close()
+	defer func(f *os.File) {
+		err := f.Close()
+		if err != nil {
+			log.Printf("error closing file: %s", err)
+		}
+	}(f)
 	log.Printf("Logging to %s", f.Name())
 	log.SetOutput(f)
 
@@ -34,7 +40,17 @@ func main() {
 	buf := NewLuaBuffer()
 	win := edit.NewWindow(buf)
 	if dumpAtEnd {
-		defer buf.WriteTo(os.Stdout)
+		defer func(buf *LuaBuffer, w io.Writer) {
+			_, err := buf.WriteTo(w)
+			if err != nil {
+				log.Printf("error writing buffer to output: %s", err)
+			} else {
+				_, err = fmt.Fprintln(w, "\nSession ended.")
+				if err != nil {
+					log.Printf("error writing end message to output: %s", err)
+				}
+			}
+		}(buf, os.Stdout)
 	}
 
 	app := edit.NewApp(win)
@@ -57,7 +73,10 @@ func main() {
 }
 
 func usage() {
-	fmt.Fprintf(flag.CommandLine.Output(), "Help for %s:\n%s\nUsage:\n", os.Args[0], helpMessage)
+	_, err := fmt.Fprintf(flag.CommandLine.Output(), "Help for %s:\n%s\nUsage:\n", os.Args[0], helpMessage)
+	if err != nil {
+		log.Fatalf("error writing usage message: %s", err)
+	}
 	flag.PrintDefaults()
 }
 
