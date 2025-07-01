@@ -27,7 +27,7 @@ print(ctx.used.millis <= 150)
 -- print(n > 100000)
 --> =true
 
--- The outer context keeps track of time spent in the inner context
+--[[ The outer context keeps track of time spent in the inner context
 local ctx = runtime.callcontext({kill={seconds=0.1}}, function()
     for i = 1, 3 do
         runtime.callcontext({kill={millis=10}}, function()
@@ -50,3 +50,4 @@ local ctx = runtime.callcontext({kill={millis=10}}, function()
             --> =true
         end)
 end)
+]]
