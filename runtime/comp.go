@@ -2,7 +2,6 @@ package runtime
 
 import (
 	"fmt"
-	"log"
 )
 
 // RawEqual returns two values.  The second one is true if raw equality makes
@@ -175,7 +174,7 @@ func le(t *Thread, x, y Value) (bool, error) {
 		case FloatType:
 			return leIntAndFloat(x.AsInt(), y.AsFloat()), nil
 		default:
-			log.Fatalf("unexpected type %s for y in le", y.CustomTypeName())
+			// do nothing
 		}
 	case FloatType:
 		switch y.NumberType() {
@@ -184,10 +183,10 @@ func le(t *Thread, x, y Value) (bool, error) {
 		case FloatType:
 			return x.AsFloat() <= y.AsFloat(), nil
 		default:
-			log.Fatalf("unexpected type %s for y in le", y.CustomTypeName())
+			// do nothing
 		}
 	default:
-		log.Fatalf("unexpected type %s for y in le", y.CustomTypeName())
+		// do nothing
 	}
 	if sx, ok := x.TryString(); ok {
 		if sy, ok := y.TryString(); ok {
