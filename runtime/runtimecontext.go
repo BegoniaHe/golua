@@ -85,18 +85,18 @@ func (s RuntimeContextStatus) String() string {
 type ComplianceFlags uint16
 
 const (
-	// Only execute code checks memory availability before allocating memory
+	// ComplyMemSafe Only execute code checks memory availability before allocating memory
 	ComplyMemSafe ComplianceFlags = 1 << iota
 
-	// Only execute code that checks cpu availability before executing a
+	// ComplyCpuSafe Only execute code that checks cpu availability before executing a
 	// computation.
 	ComplyCpuSafe
 
-	// Only execute code that complies with IO restrictions (currently only
+	// ComplyIoSafe Only execute code that complies with IO restrictions (currently only
 	// functions that do no IO comply with this)
 	ComplyIoSafe
 
-	// Only execute code that is time safe (i.e. it will not block on long
+	// ComplyTimeSafe Only execute code that is time safe (i.e. it will not block on long
 	// running ops, typically IO)
 	ComplyTimeSafe
 

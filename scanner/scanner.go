@@ -22,7 +22,7 @@ type Scanner struct {
 
 type Option func(*Scanner)
 
-// Specializes in scanning a number, used in file:read("n")
+// ForNumber Specializes in scanning a number, used in file:read("n")
 func ForNumber() Option {
 	return func(s *Scanner) {
 		s.state = scanNumberPrefix

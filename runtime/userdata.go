@@ -61,7 +61,7 @@ func (d *UserData) Clone() luagc.Value {
 	return clone
 }
 
-// HasFinalizer returns true if the user data has finalizing code (either via
+// MarkFlags HasFinalizer returns true if the user data has finalizing code (either via
 // __gc metamethod or the value needs prefinalization).
 func (d *UserData) MarkFlags() (flags luagc.MarkFlags) {
 	_, ok := d.value.(UserDataResourceReleaser)
@@ -74,7 +74,7 @@ func (d *UserData) MarkFlags() (flags luagc.MarkFlags) {
 	return flags
 }
 
-// Prefinalizer runs the value's prefinalize
+// ReleaseResources Prefinalizer runs the value's prefinalize
 func (d *UserData) ReleaseResources() {
 	if pf, ok := d.value.(UserDataResourceReleaser); ok {
 		pf.ReleaseResources(d)

@@ -1,6 +1,9 @@
 package runtime
 
-import "fmt"
+import (
+	"fmt"
+	"log"
+)
 
 // RawEqual returns two values.  The second one is true if raw equality makes
 // sense for x and y.  The first one returns whether x and y are raw equal.
@@ -17,6 +20,8 @@ func RawEqual(x, y Value) (bool, bool) {
 		if ny, ok := y.TryInt(); ok {
 			return equalIntAndFloat(ny, x.AsFloat()), true
 		}
+	default:
+		return false, false
 	}
 	return false, false
 }
@@ -169,6 +174,8 @@ func le(t *Thread, x, y Value) (bool, error) {
 			return x.AsInt() <= y.AsInt(), nil
 		case FloatType:
 			return leIntAndFloat(x.AsInt(), y.AsFloat()), nil
+		default:
+			log.Fatalf("unexpected type %s for y in le", y.CustomTypeName())
 		}
 	case FloatType:
 		switch y.NumberType() {
@@ -176,7 +183,11 @@ func le(t *Thread, x, y Value) (bool, error) {
 			return leFloatAndInt(x.AsFloat(), y.AsInt()), nil
 		case FloatType:
 			return x.AsFloat() <= y.AsFloat(), nil
+		default:
+			log.Fatalf("unexpected type %s for y in le", y.CustomTypeName())
 		}
+	default:
+		log.Fatalf("unexpected type %s for y in le", y.CustomTypeName())
 	}
 	if sx, ok := x.TryString(); ok {
 		if sy, ok := y.TryString(); ok {

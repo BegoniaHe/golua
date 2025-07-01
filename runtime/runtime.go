@@ -287,7 +287,7 @@ func (r *Runtime) Metatable(v Value) Value {
 	return TableValue(meta)
 }
 
-// Set a value in a table, requiring memory if needed, and always consuming >0
+// SetTable Set a value in a table, requiring memory if needed, and always consuming >0
 // CPU.
 func (r *Runtime) SetTable(t *Table, k, v Value) {
 	r.RequireCPU(1)

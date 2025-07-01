@@ -1,5 +1,4 @@
 //go:build !noquotas
-// +build !noquotas
 
 package runtime
 

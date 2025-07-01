@@ -68,7 +68,7 @@ FillEtc:
 
 // RunInThread implements Cont.RunInThread. A termination exits
 // immediately so it always returns nil.
-func (c *Termination) RunInThread(t *Thread) (Cont, error) {
+func (c *Termination) RunInThread(_ *Thread) (Cont, error) {
 	return nil, nil
 }
 

@@ -19,7 +19,7 @@ type Code struct {
 	CellCount    int16
 }
 
-// RefactorConsts returns an equivalent *Code this consts "refactored", which
+// RefactorCodeConsts RefactorConsts returns an equivalent *Code this consts "refactored", which
 // means that the consts are slimmed down to only contains the constants
 // required for the function.
 func (r *Runtime) RefactorCodeConsts(c *Code) *Code {

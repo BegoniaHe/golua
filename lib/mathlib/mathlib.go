@@ -4,7 +4,6 @@ import (
 	crypto "crypto/rand"
 	"encoding/binary"
 	"errors"
-	olog "log"
 	"math"
 	"math/rand"
 
@@ -444,25 +443,8 @@ func typef(t *rt.Thread, c *rt.GoCont) (rt.Cont, error) {
 		tp = rt.StringValue("integer")
 	case rt.FloatType:
 		tp = rt.StringValue("float")
-	case rt.StringType:
-		tp = rt.StringValue("string")
-	case rt.NilType:
-		tp = rt.StringValue("nil")
-	case rt.BoolType:
-		tp = rt.StringValue("boolean")
-	case rt.CodeType:
-		tp = rt.StringValue("function")
-	case rt.TableType:
-		tp = rt.StringValue("table")
-	case rt.FunctionType:
-		tp = rt.StringValue("function")
-	case rt.ThreadType:
-		tp = rt.StringValue("thread")
-	case rt.UserDataType:
-		tp = rt.StringValue("userdata")
-	case rt.UnknownType:
-		tp = rt.StringValue("unknown")
-		olog.Printf("typef: unknown type: %s", c.Arg(0).TypeName())
+	default:
+		tp = rt.StringValue(c.Arg(0).TypeName())
 	}
 	return c.PushingNext1(t.Runtime, tp), nil
 }

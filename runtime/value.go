@@ -1,5 +1,4 @@
 //go:build !noscalar
-// +build !noscalar
 
 package runtime
 

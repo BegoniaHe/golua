@@ -14,7 +14,7 @@ type Warner interface {
 	Warn(msgs ...string)
 }
 
-// The default Warner type.  It logs messages to a given io.Writer.  Note that
+// LogWarner The default Warner type.  It logs messages to a given io.Writer.  Note that
 // it is off by default.  Issue Warn("@on") to turn it on.
 type LogWarner struct {
 	on   bool
@@ -45,6 +45,6 @@ func (w *LogWarner) Warn(msgs ...string) {
 		return
 	}
 	if w.on {
-		fmt.Fprintf(w.dest, "%s%s\n", w.pfx, strings.Join(msgs, ""))
+		_, _ = fmt.Fprintf(w.dest, "%s%s\n", w.pfx, strings.Join(msgs, ""))
 	}
 }

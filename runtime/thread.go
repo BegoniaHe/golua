@@ -36,7 +36,6 @@ type valuesError struct {
 //
 // The mutex guarantees that if status == ThreadRunning, then caller
 // is not nil.
-//
 type Thread struct {
 	*Runtime
 	mux         sync.Mutex
@@ -378,10 +377,8 @@ func (t *Thread) cleanupCloseStack(c Cont, h int, err error) error {
 	return err
 }
 
-//
 // messageHandlerCont is a continuation that handles an error message (i.e.
 // turns it to handled).
-//
 type messageHandlerCont struct {
 	c    Cont
 	err  Value
@@ -406,7 +403,7 @@ func (c *messageHandlerCont) Parent() Cont {
 	return c.Next()
 }
 
-func (c *messageHandlerCont) Push(r *Runtime, v Value) {
+func (c *messageHandlerCont) Push(_ *Runtime, v Value) {
 	if !c.done {
 		c.done = true
 		c.err = v
@@ -420,6 +417,6 @@ func (c *messageHandlerCont) PushEtc(r *Runtime, etc []Value) {
 	c.Push(r, etc[0])
 }
 
-func (c *messageHandlerCont) RunInThread(t *Thread) (Cont, error) {
+func (c *messageHandlerCont) RunInThread(_ *Thread) (Cont, error) {
 	return nil, newHandledError(c.err)
 }

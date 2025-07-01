@@ -1,5 +1,4 @@
 //go:build !nocontpool
-// +build !nocontpool
 
 package runtime
 
