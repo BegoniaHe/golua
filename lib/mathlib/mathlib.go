@@ -444,7 +444,7 @@ func typef(t *rt.Thread, c *rt.GoCont) (rt.Cont, error) {
 	case rt.FloatType:
 		tp = rt.StringValue("float")
 	default:
-		tp = rt.StringValue(c.Arg(0).TypeName())
+		// do nothing
 	}
 	return c.PushingNext1(t.Runtime, tp), nil
 }
