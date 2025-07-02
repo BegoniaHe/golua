@@ -445,14 +445,28 @@ var binopMap = map[token.Type]ops.Op{
 func (p *Parser) FunctionDef(startTok *token.Token) (ast.Function, *token.Token) {
 	expectType(startTok, token.SgOpenBkt, "'('")
 	t := p.Scan()
-	var names []ast.Name
+	var names []ast.TypedName
 	hasEtc := false
 ParamsLoop:
 	for {
 		switch t.Type {
 		case token.IDENT:
-			names = append(names, ast.NewName(t))
+			name := ast.NewName(t)
 			t = p.Scan()
+			
+			// Check for type annotation
+			var typeName string
+			if t.Type == token.SgColon {
+				t = p.Scan()
+				if t.Type != token.IDENT {
+					tokenError(t, "expected type name after ':'")
+				}
+				typeName = string(t.Lit)
+				t = p.Scan()
+			}
+			
+			names = append(names, ast.NewTypedName(name, typeName))
+			
 			if t.Type != token.SgComma {
 				break ParamsLoop
 			}

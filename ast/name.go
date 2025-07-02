@@ -10,6 +10,12 @@ type Name struct {
 	Val string
 }
 
+// TypedName represents a parameter with optional type annotation.
+type TypedName struct {
+	Name Name
+	Type string // empty string means no type annotation
+}
+
 var _ Var = Name{}
 
 // NewName returns a Name instance with value taken from the given token.
@@ -17,6 +23,14 @@ func NewName(id *token.Token) Name {
 	return Name{
 		Location: LocFromToken(id),
 		Val:      string(id.Lit),
+	}
+}
+
+// NewTypedName creates a TypedName with the given name and type.
+func NewTypedName(name Name, typeName string) TypedName {
+	return TypedName{
+		Name: name,
+		Type: typeName,
 	}
 }
 

@@ -362,7 +362,7 @@ func (c *compiler) compileFunctionBody(f ast.Function) {
 	c.DeclareLocal(callerRegName, callerReg)
 	for i, p := range f.Params {
 		reg := c.GetFreeRegister()
-		c.DeclareLocal(ir.Name(p.Val), reg)
+		c.DeclareLocal(ir.Name(p.Name.Val), reg)
 		recvRegs[i] = reg
 	}
 	if !f.HasDots {
@@ -373,6 +373,13 @@ func (c *compiler) compileFunctionBody(f ast.Function) {
 		c.emitInstr(f, ir.ReceiveEtc{Dst: recvRegs, Etc: reg})
 	}
 
+	// Insert type checking for typed parameters
+	for i, p := range f.Params {
+		if p.Type != "" {
+			c.emitTypeCheck(f, p.Name.Val, p.Type, recvRegs[i])
+		}
+	}
+
 	// Need to make sure there is a return instruction emitted at the
 	// end.
 	body := f.Body
@@ -380,7 +387,6 @@ func (c *compiler) compileFunctionBody(f ast.Function) {
 		body.Return = []ast.ExpNode{}
 	}
 	c.compileBlock(body)
-
 }
 
 func (c *compiler) getEllipsisReg() ir.Register {
@@ -470,4 +476,10 @@ func globalVar(n ast.Name) ast.IndexExp {
 		Coll:     ast.Name{Location: n.Location, Val: "_ENV"},
 		Idx:      n.AstString(),
 	}
+}
+
+// emitTypeCheck generates IR code for runtime type checking
+// TODO: Implement type checking in a future version
+func (c *compiler) emitTypeCheck(f ast.Function, paramName string, expectedType string, paramReg ir.Register) {
+	// Placeholder for future type checking implementation
 }

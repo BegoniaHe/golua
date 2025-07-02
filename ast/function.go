@@ -37,7 +37,10 @@ func (f Function) ProcessExp(p ExpProcessor) {
 func (f Function) HWrite(w HWriter) {
 	w.Writef("(")
 	for i, param := range f.Params {
-		w.Writef(param.Val)
+		w.Writef(param.Name.Val)
+		if param.Type != "" {
+			w.Writef(":" + param.Type)
+		}
 		if i < len(f.Params)-1 || f.HasDots {
 			w.Writef(", ")
 		}
@@ -54,12 +57,12 @@ func (f Function) HWrite(w HWriter) {
 
 // A ParList represents a function parameter list (it is not a node).
 type ParList struct {
-	Params  []Name
+	Params  []TypedName
 	HasDots bool
 }
 
 // NewParList returns ParList instance for the given parameters.
-func NewParList(params []Name, hasDots bool) ParList {
+func NewParList(params []TypedName, hasDots bool) ParList {
 	return ParList{
 		Params:  params,
 		HasDots: hasDots,
